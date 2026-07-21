@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
 spec:
-  replicas: {{.Values.service.replicas}}
+  replicas: {{ .Values.service.replicas }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -13,8 +13,9 @@ spec:
     metadata:
       labels:
         app: {{ .Chart.Name }}
-  spec:
-    containers:
-      - name: shipping
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-        command: ['sh', '-c', 'echo {{ .Values.appMessage }}; sleep 3600']
+    spec:
+      containers:
+        - name: shipping
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command: ['sh', '-c', 'echo {{ .Values.appMessage }}; sleep 3600']
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
